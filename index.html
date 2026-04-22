@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <title>Extension Tutorials · Vortix</title>
-  <!-- No comments — pure morphism & responsive design -->
   <style>
-    /* RESET & BASE — glass + neumorphism + claymorphism blend */
     * {
       margin: 0;
       padding: 0;
@@ -23,9 +21,14 @@
       align-items: center;
       padding: 1rem 1rem 2rem;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.25s ease, background-image 0.25s;
     }
 
-    /* main card container — clay + glass */
+    body.dark {
+      background: #121a24;
+      background-image: radial-gradient(circle at 30% 20%, #1e2a36 0%, #0f151c 100%);
+    }
+
     .app-wrapper {
       max-width: 900px;
       width: 100%;
@@ -33,17 +36,20 @@
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-radius: 48px;
-      box-shadow: 
-        12px 12px 24px rgba(166, 180, 200, 0.5),
-        -8px -8px 18px rgba(255, 255, 255, 0.7),
-        inset 2px 2px 6px rgba(255,255,255,0.8),
-        inset -3px -3px 8px rgba(0,0,0,0.05);
+      box-shadow: 12px 12px 24px rgba(166, 180, 200, 0.5), -8px -8px 18px rgba(255, 255, 255, 0.7), inset 2px 2px 6px rgba(255,255,255,0.8), inset -3px -3px 8px rgba(0,0,0,0.05);
       border: 1px solid rgba(255, 255, 255, 0.5);
       padding: 1.8rem 1.8rem 2.2rem;
-      transition: all 0.2s ease;
+      transition: all 0.2s ease, background 0.2s, box-shadow 0.2s;
     }
 
-    /* navigation — glassmorphism top bar */
+    body.dark .app-wrapper {
+      background: rgba(20, 30, 40, 0.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 12px 12px 28px rgba(0, 0, 0, 0.5), -6px -6px 18px rgba(70, 90, 110, 0.25), inset 1px 1px 3px rgba(255,255,255,0.08), inset -2px -2px 5px rgba(0,0,0,0.3);
+      border: 1px solid rgba(90, 120, 150, 0.3);
+    }
+
     .nav-bar {
       display: flex;
       justify-content: center;
@@ -55,11 +61,17 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 120px;
-      box-shadow: 
-        4px 6px 12px rgba(0, 0, 0, 0.04),
-        inset 1px 1px 4px #ffffffcc,
-        inset -2px -2px 4px rgba(0,0,0,0.02);
+      box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.04), inset 1px 1px 4px #ffffffcc, inset -2px -2px 4px rgba(0,0,0,0.02);
       border: 1px solid rgba(255,255,255,0.45);
+      transition: all 0.2s;
+    }
+
+    body.dark .nav-bar {
+      background: rgba(30, 45, 60, 0.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 4px 6px 14px rgba(0,0,0,0.3), inset 1px 1px 3px rgba(255,255,255,0.1), inset -2px -2px 6px rgba(0,0,0,0.2);
+      border: 1px solid rgba(120, 150, 180, 0.25);
     }
 
     .nav-link {
@@ -72,36 +84,48 @@
       background: rgba(245, 248, 255, 0.5);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-      box-shadow: 
-        3px 4px 8px rgba(136, 150, 170, 0.15),
-        -2px -2px 6px #ffffffd0,
-        inset 0px 1px 2px #fff9;
+      box-shadow: 3px 4px 8px rgba(136, 150, 170, 0.15), -2px -2px 6px #ffffffd0, inset 0px 1px 2px #fff9;
       border: 1px solid rgba(255,255,255,0.7);
       transition: all 0.18s;
       letter-spacing: -0.01em;
       display: inline-block;
     }
 
+    body.dark .nav-link {
+      color: #e3ecf5;
+      background: rgba(40, 60, 80, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 3px 4px 8px rgba(0,0,0,0.2), -2px -2px 8px rgba(200,220,240,0.05), inset 0 0 0 1px rgba(255,255,255,0.05);
+      border: 1px solid rgba(180, 210, 240, 0.15);
+    }
+
     .nav-link:hover {
       background: rgba(255, 255, 255, 0.8);
-      box-shadow: 
-        5px 6px 12px rgba(110, 130, 160, 0.2),
-        -3px -3px 8px #fffffff2,
-        inset 0 0 0 1px #ffffff;
+      box-shadow: 5px 6px 12px rgba(110, 130, 160, 0.2), -3px -3px 8px #fffffff2, inset 0 0 0 1px #ffffff;
       transform: translateY(-1px);
+    }
+
+    body.dark .nav-link:hover {
+      background: rgba(60, 85, 110, 0.7);
+      box-shadow: 5px 6px 14px rgba(0,0,0,0.3), -2px -2px 6px rgba(255,255,255,0.08);
+      border: 1px solid rgba(220, 240, 255, 0.25);
     }
 
     .nav-link.active {
       background: #ffffffdd;
-      box-shadow: 
-        inset 3px 3px 8px rgba(156, 170, 190, 0.25),
-        inset -4px -4px 8px #ffffff,
-        0 4px 8px rgba(0,0,0,0.02);
+      box-shadow: inset 3px 3px 8px rgba(156, 170, 190, 0.25), inset -4px -4px 8px #ffffff, 0 4px 8px rgba(0,0,0,0.02);
       color: #0f1a26;
       border: 1px solid #ffffff;
     }
 
-    /* page content — neumorphism cards + clay accents */
+    body.dark .nav-link.active {
+      background: #1f3345dd;
+      box-shadow: inset 3px 3px 10px #0a121c, inset -3px -3px 10px #30485f, 0 4px 8px #00000030;
+      color: #f0f7ff;
+      border: 1px solid #3e5e78;
+    }
+
     .page-title {
       font-size: 2.1rem;
       font-weight: 700;
@@ -114,18 +138,28 @@
       gap: 10px;
     }
 
+    body.dark .page-title {
+      color: #dde9f5;
+      text-shadow: 1px 2px 6px rgba(0,0,0,0.4);
+    }
+
     .steps-card {
       background: rgba(250, 252, 255, 0.55);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-radius: 36px;
       padding: 2rem 1.8rem;
-      box-shadow: 
-        10px 10px 24px rgba(120, 138, 160, 0.2),
-        -6px -6px 18px #fffffffa,
-        inset 1px 1px 4px #ffffff,
-        inset -2px -2px 6px rgba(0,0,0,0.02);
+      box-shadow: 10px 10px 24px rgba(120, 138, 160, 0.2), -6px -6px 18px #fffffffa, inset 1px 1px 4px #ffffff, inset -2px -2px 6px rgba(0,0,0,0.02);
       border: 1px solid rgba(255,255,255,0.6);
+      transition: all 0.25s;
+    }
+
+    body.dark .steps-card {
+      background: rgba(20, 32, 45, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 8px 8px 24px #03060880, -6px -6px 18px #1e324350, inset 1px 1px 4px #ffffff1a, inset -2px -2px 6px #00000030;
+      border: 1px solid rgba(150, 190, 230, 0.2);
     }
 
     .step-list {
@@ -144,6 +178,10 @@
       font-weight: 470;
     }
 
+    body.dark .step-item {
+      color: #d0e2f0;
+    }
+
     .step-item::before {
       content: counter(step-counter);
       position: absolute;
@@ -159,11 +197,16 @@
       font-weight: 700;
       font-size: 1rem;
       color: #1a344c;
-      box-shadow: 
-        3px 3px 8px rgba(148, 164, 184, 0.25),
-        -3px -3px 8px #ffffff,
-        inset 0px 1px 3px #ffffff;
+      box-shadow: 3px 3px 8px rgba(148, 164, 184, 0.25), -3px -3px 8px #ffffff, inset 0px 1px 3px #ffffff;
       border: 1px solid rgba(255,255,255,0.7);
+      transition: all 0.2s;
+    }
+
+    body.dark .step-item::before {
+      background: #1e3347;
+      color: #c6def5;
+      box-shadow: 3px 3px 8px #0a1118, -3px -3px 8px #2f465e, inset 0px 1px 2px #aaccff30;
+      border: 1px solid #3b5e7a;
     }
 
     .code-path {
@@ -181,6 +224,14 @@
       margin: 0.2rem 0;
     }
 
+    body.dark .code-path {
+      background: #1f3345c0;
+      backdrop-filter: blur(6px);
+      box-shadow: inset 1px 2px 4px #00000030, 0 2px 4px #2c4860;
+      border: 1px solid #4a718e;
+      color: #e6f0fc;
+    }
+
     .credits {
       margin-top: 2rem;
       font-size: 0.9rem;
@@ -190,21 +241,26 @@
       color: #2e445e;
     }
 
+    body.dark .credits {
+      color: #b0c9e0;
+    }
+
     .video-container {
       margin: 1.8rem 0 1rem;
       border-radius: 32px;
       overflow: hidden;
-      box-shadow: 
-        12px 12px 28px rgba(99, 118, 140, 0.2),
-        -6px -6px 20px #ffffff,
-        inset 0 0 0 1px rgba(255,255,255,0.7);
+      box-shadow: 12px 12px 28px rgba(99, 118, 140, 0.2), -6px -6px 20px #ffffff, inset 0 0 0 1px rgba(255,255,255,0.7);
       background: #d9e2ec30;
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       padding: 6px;
     }
 
-    /* android special — preserved embed ratio */
+    body.dark .video-container {
+      box-shadow: 8px 8px 24px #00000060, -4px -4px 16px #1a2b3c, inset 0 0 0 1px #4b6a8450;
+      background: #1a2a3840;
+    }
+
     .streamable-embed {
       position: relative;
       width: 100%;
@@ -212,6 +268,11 @@
       padding-bottom: 220%;
       border-radius: 28px;
       overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8);
+    }
+
+    body.dark .streamable-embed {
+      box-shadow: inset 0 0 0 1px #a0c0e030;
     }
 
     .streamable-embed iframe {
@@ -223,17 +284,6 @@
       border: none;
     }
 
-    /* responsive fine-tuning */
-    @media (max-width: 600px) {
-      body { padding: 0.6rem; }
-      .app-wrapper { padding: 1.2rem 1rem 1.8rem; border-radius: 32px; }
-      .nav-link { font-size: 1rem; padding: 0.5rem 1.2rem; }
-      .page-title { font-size: 1.8rem; }
-      .steps-card { padding: 1.5rem 1.2rem; }
-      .step-item { font-size: 1rem; padding-left: 2.5rem; }
-    }
-
-    /* subtle clay morph on buttons / inline */
     .highlight-badge {
       background: #d4e1f0c0;
       backdrop-filter: blur(5px);
@@ -242,6 +292,14 @@
       border-radius: 30px;
       box-shadow: inset 0 1px 3px #ffffff, 0 3px 6px #b0c2d4;
       border: 1px solid #fffffff0;
+    }
+
+    body.dark .highlight-badge {
+      background: #26445ec0;
+      backdrop-filter: blur(8px);
+      box-shadow: inset 0 1px 3px #aaccff30, 0 3px 6px #030a0f;
+      border: 1px solid #6b95b8;
+      color: #eaf2fc;
     }
 
     .important-note {
@@ -256,24 +314,124 @@
       font-weight: 500;
     }
 
+    body.dark .important-note {
+      background: #1f3345d0;
+      backdrop-filter: blur(10px);
+      border-left: 6px solid #7ca9d0;
+      box-shadow: inset 0 0 0 1px #aaccff20, 4px 6px 12px #050a10;
+      color: #deecf9;
+    }
+
     hr {
       margin: 2rem 0 0.5rem;
       border: 0;
       height: 1px;
       background: linear-gradient(90deg, transparent, #b0c8e0, transparent);
     }
+
+    body.dark hr {
+      background: linear-gradient(90deg, transparent, #3b5e7a, transparent);
+    }
+
+    .theme-toggle {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      margin-left: 1rem;
+      background: rgba(235, 245, 255, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.3rem;
+      border-radius: 100px;
+      box-shadow: inset 2px 2px 6px #b0c2d8, inset -3px -3px 8px #ffffff, 2px 4px 8px #b0c0d0;
+      border: 1px solid #ffffffd0;
+    }
+
+    body.dark .theme-toggle {
+      background: #1c3042b0;
+      box-shadow: inset 2px 2px 8px #030a10, inset -2px -2px 8px #2b4760, 2px 4px 8px #00000060;
+      border: 1px solid #3e6888;
+    }
+
+    .theme-toggle button {
+      background: transparent;
+      border: none;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: #1a2a38;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.05), -2px -2px 6px #ffffff;
+    }
+
+    body.dark .theme-toggle button {
+      color: #d4e6ff;
+      box-shadow: 2px 2px 6px #00000060, -2px -2px 6px #3d607c;
+    }
+
+    .theme-toggle button.active {
+      background: #ffffffd0;
+      box-shadow: inset 2px 2px 5px #a0b4ca, inset -3px -3px 6px #ffffff;
+    }
+
+    body.dark .theme-toggle button.active {
+      background: #2b465ed0;
+      box-shadow: inset 2px 2px 6px #0f1a24, inset -2px -2px 6px #406280;
+    }
+
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 0.6rem; }
+      .app-wrapper { padding: 1.2rem 1rem 1.8rem; border-radius: 32px; }
+      .nav-link { font-size: 1rem; padding: 0.5rem 1.2rem; }
+      .page-title { font-size: 1.8rem; }
+      .steps-card { padding: 1.5rem 1.2rem; }
+      .step-item { font-size: 1rem; padding-left: 2.5rem; }
+      .top-row { flex-wrap: wrap; }
+    }
+
+    @media (hover: none) {
+      .nav-link:hover { transform: none; }
+    }
+
+    .footer-note {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 0.6rem;
+    }
+
+    body.dark .footer-note {
+      color: #b8d2ec;
+    }
   </style>
 </head>
 <body>
 <div class="app-wrapper">
-  <!-- top navigation — 3 pages -->
-  <nav class="nav-bar">
-    <a href="#" class="nav-link active" data-page="ios">📱 iOS</a>
-    <a href="#" class="nav-link" data-page="pc">💻 PC / Chrome</a>
-    <a href="#" class="nav-link" data-page="android">🤖 Android</a>
-  </nav>
+  <div class="top-row">
+    <nav class="nav-bar">
+      <a href="#" class="nav-link active" data-page="ios">📱 iOS</a>
+      <a href="#" class="nav-link" data-page="pc">💻 PC / Chrome</a>
+      <a href="#" class="nav-link" data-page="android">🤖 Android</a>
+    </nav>
+    <div class="theme-toggle" id="themeToggle">
+      <button id="lightBtn" class="active" title="Light mode">☀️</button>
+      <button id="darkBtn" title="Dark mode">🌙</button>
+    </div>
+  </div>
 
-  <!-- dynamic page container — iOS (default) -->
   <div id="page-ios" class="page-content">
     <div class="page-title">
       <span>🍏 iOS · Orion Extension</span>
@@ -281,13 +439,9 @@
     <div class="steps-card">
       <ol class="step-list" style="list-style:none; padding-left:0;">
         <li class="step-item"><strong>Install the Orion Browser</strong><br>Download and install the Orion browser on your iOS Device.</li>
-        <li class="step-item"><strong>Enable Firefox Extension Support <span class="highlight-badge">IMPORTANT</span></strong><br>
-          Open Orion → Tap “…” (bottom right) → Settings → Advanced → Turn ON “Firefox Extensions Support”
-        </li>
+        <li class="step-item"><strong>Enable Firefox Extension Support <span class="highlight-badge">IMPORTANT</span></strong><br>Open Orion → Tap “…” (bottom right) → Settings → Advanced → Turn ON “Firefox Extensions Support”</li>
         <li class="step-item"><strong>Prepare the Extension</strong><br>Download the extension .zip file → Unzip so you have a normal folder.</li>
-        <li class="step-item"><strong>Move the Extension Folder</strong><br>Open Files app → Move unzipped folder into:<br>
-          <span class="code-path">Orion → Extensions</span>
-        </li>
+        <li class="step-item"><strong>Move the Extension Folder</strong><br>Open Files app → Move unzipped folder into:<br><span class="code-path">Orion → Extensions</span></li>
         <li class="step-item"><strong>Install the Extension in Orion</strong><br>Open Orion → Tap “…” → Extensions → Install from File → Open <span class="code-path">Orion → Extensions</span> folder → Select the extension folder → Select / install <span class="code-path">manifest.json</span></li>
         <li class="step-item"><strong>Done</strong><br>The extension should now be installed and active.</li>
       </ol>
@@ -295,7 +449,6 @@
     </div>
   </div>
 
-  <!-- PC / Chrome page (hidden by default) -->
   <div id="page-pc" class="page-content" style="display:none;">
     <div class="page-title">
       <span>🖥️ PC · Chrome Extension</span>
@@ -309,26 +462,19 @@
         <li class="step-item">Click <span class="code-path">VortixBypassExtention</span> and open</li>
         <li class="step-item">Click <span class="code-path">Vortix bypass</span> and select folder — extension added</li>
       </ol>
-      <div class="important-note" style="margin-top:1.2rem;">
-        ✅ Extension will be added after you selected the folder.
-      </div>
+      <div class="important-note">✅ Extension will be added after you selected the folder.</div>
       <div class="credits">Credits camper</div>
     </div>
   </div>
 
-  <!-- Android page (hidden by default) with video embed -->
   <div id="page-android" class="page-content" style="display:none;">
     <div class="page-title">
       <span>🤖 Android · Lemur Browser</span>
     </div>
     <div class="steps-card">
-      <!-- video clip first -->
       <div class="video-container">
         <div class="streamable-embed">
-          <iframe allow="fullscreen;autoplay" allowfullscreen 
-                  src="https://streamable.com/e/2mi9w9?autoplay=1" 
-                  style="border:none; width:100%; height:100%; position:absolute; left:0; top:0; overflow:hidden;">
-          </iframe>
+          <iframe allow="fullscreen;autoplay" allowfullscreen src="https://streamable.com/e/2mi9w9?autoplay=1" style="border:none; width:100%; height:100%; position:absolute; left:0; top:0; overflow:hidden;"></iframe>
         </div>
       </div>
       <ol class="step-list" style="list-style:none; padding-left:0; margin-top:0.5rem;">
@@ -343,16 +489,14 @@
     </div>
   </div>
 
-  <!-- subtle footer line -->
   <hr>
-  <div style="display:flex; justify-content: flex-end; font-size:0.8rem; opacity:0.7; margin-top:0.6rem;">
+  <div class="footer-note">
     <span>vortex · extension tutorials</span>
   </div>
 </div>
 
 <script>
-  (function() {
-    // pure navigation — 3 pages, morphism ready, no comments
+  (function(){
     const navLinks = document.querySelectorAll('.nav-link');
     const pageIOS = document.getElementById('page-ios');
     const pagePC = document.getElementById('page-pc');
@@ -362,32 +506,19 @@
       pageIOS.style.display = pageId === 'ios' ? 'block' : 'none';
       pagePC.style.display = pageId === 'pc' ? 'block' : 'none';
       pageAndroid.style.display = pageId === 'android' ? 'block' : 'none';
-      
       navLinks.forEach(link => {
         const linkPage = link.getAttribute('data-page');
-        if (linkPage === pageId) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
+        link.classList.toggle('active', linkPage === pageId);
       });
-      
-      // Update URL hash without reload (optional)
-      if (history.pushState) {
-        history.pushState(null, '', '#' + pageId);
-      }
+      if (history.pushState) history.pushState(null, '', '#' + pageId);
     }
     
-    function handleNavClick(e) {
+    navLinks.forEach(link => link.addEventListener('click', (e) => {
       e.preventDefault();
-      const link = e.currentTarget;
-      const page = link.getAttribute('data-page');
+      const page = e.currentTarget.getAttribute('data-page');
       if (page) setActivePage(page);
-    }
+    }));
     
-    navLinks.forEach(link => link.addEventListener('click', handleNavClick));
-    
-    // initial: check hash or default ios
     function initFromHash() {
       const hash = window.location.hash.substring(1);
       if (hash === 'pc') setActivePage('pc');
@@ -397,54 +528,48 @@
     
     initFromHash();
     window.addEventListener('hashchange', initFromHash);
+    window.addEventListener('popstate', initFromHash);
     
-    // ensure active class matches
-    window.addEventListener('popstate', function() {
-      const hash = window.location.hash.substring(1);
-      if (hash === 'pc') setActivePage('pc');
-      else if (hash === 'android') setActivePage('android');
-      else setActivePage('ios');
-    });
+    const ua = navigator.userAgent;
+    const body = document.body;
+    if (/iPhone|iPad|iPod/i.test(ua)) body.classList.add('ios-device');
+    if (/Android/i.test(ua)) body.classList.add('android-device');
+    if (/Macintosh|Windows|Linux/i.test(ua) && !/Mobile|Android|iPhone/i.test(ua)) body.classList.add('desktop-device');
+    
+    const lightBtn = document.getElementById('lightBtn');
+    const darkBtn = document.getElementById('darkBtn');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let currentTheme = localStorage.getItem('theme');
+    if (!currentTheme) currentTheme = prefersDark ? 'dark' : 'light';
+    
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        body.classList.add('dark');
+        lightBtn.classList.remove('active');
+        darkBtn.classList.add('active');
+      } else {
+        body.classList.remove('dark');
+        lightBtn.classList.add('active');
+        darkBtn.classList.remove('active');
+      }
+      localStorage.setItem('theme', theme);
+    }
+    
+    applyTheme(currentTheme);
+    lightBtn.addEventListener('click', () => applyTheme('light'));
+    darkBtn.addEventListener('click', () => applyTheme('dark'));
+    
+    if (body.classList.contains('ios-device')) {
+      const style = document.createElement('style');
+      style.textContent = '.app-wrapper { padding-bottom: 2.2rem; } .nav-bar { backdrop-filter: blur(22px); }';
+      document.head.appendChild(style);
+    }
+    if (body.classList.contains('android-device')) {
+      const style = document.createElement('style');
+      style.textContent = '.step-item { font-weight: 480; } .video-container { margin-bottom: 1.5rem; }';
+      document.head.appendChild(style);
+    }
   })();
 </script>
-
-<!-- subtle extra style for better glass on iframe container -->
-<style>
-  /* refine neumorphism / glass on video wrapper */
-  .video-container {
-    background: rgba(225, 238, 250, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.55);
-    box-shadow: 
-      8px 8px 20px rgba(118, 136, 158, 0.18),
-      -4px -4px 16px #fffffffa,
-      inset 1px 1px 4px #ffffffd0;
-  }
-  .streamable-embed {
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8);
-  }
-  /* additional claymorphism touches */
-  .step-item strong {
-    font-weight: 640;
-    color: #0c202e;
-  }
-  .app-wrapper {
-    transition: box-shadow 0.3s;
-  }
-  /* ensure all morphism layers work on ipad/desktop */
-  .nav-bar {
-    transition: box-shadow 0.2s;
-  }
-  .steps-card {
-    transition: box-shadow 0.25s;
-  }
-  /* touch device improvements */
-  @media (hover: none) {
-    .nav-link:hover {
-      transform: none;
-    }
-  }
-</style>
 </body>
 </html>
